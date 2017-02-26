@@ -210,12 +210,6 @@ void ElementStyle::SetClass(const String& class_name, bool activate)
 	}
 }
 
-// Checks if a class is set on the element.
-bool ElementStyle::IsClassSet(const String& class_name) const
-{
-	return std::find(classes.begin(), classes.end(), class_name) != classes.end();
-}
-
 // Specifies the entire list of classes for this element. This will replace any others specified.
 void ElementStyle::SetClassNames(const String& class_names)
 {

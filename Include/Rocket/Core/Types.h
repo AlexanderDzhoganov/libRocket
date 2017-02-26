@@ -40,6 +40,7 @@
 #include <unordered_map>
 #include <set>
 #include <vector>
+#include <algorithm>
 
 #include "Platform.h"
 #include "Debug.h"
