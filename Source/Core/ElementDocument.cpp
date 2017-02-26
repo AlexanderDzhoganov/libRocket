@@ -266,7 +266,7 @@ ElementText* ElementDocument::CreateTextNode(const String& text)
 	}
 
 	// Cast up
-	ElementText* element_text = dynamic_cast< ElementText* >(element);
+	ElementText* element_text = rocket_dynamic_cast< ElementText* >(element);
 	if (!element_text)
 	{
 		Log::Message(Log::LT_ERROR, "Failed to create text element, instancer didn't return a derivative of ElementText.");
@@ -492,6 +492,7 @@ bool ElementDocument::SearchFocusSubtree(Element* element, bool forward)
 	if (element->GetProperty<int>(TAB_INDEX) == TAB_INDEX_AUTO)
 	{
 		element->Focus();
+		element->ScrollIntoView(false);
 		return true;
 	}
 

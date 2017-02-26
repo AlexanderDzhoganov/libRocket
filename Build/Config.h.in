@@ -1,0 +1,5 @@
+#cmakedefine ROCKET_SUPPORT_RTTI 1
+
+#ifndef ROCKET_SUPPORT_RTTI
+	#define ROCKET_SUPPORT_RTTI 0
+#endif

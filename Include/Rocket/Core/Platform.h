@@ -28,6 +28,8 @@
 #ifndef ROCKETCOREPLATFORM_H
 #define ROCKETCOREPLATFORM_H
 
+#include "Config.h"
+
 #if defined __WIN32__ || defined _WIN32
 	#define ROCKET_PLATFORM_WIN32
 	#define ROCKET_PLATFORM_NAME "win32"
@@ -67,6 +69,8 @@
 
 	// <function> was declared deprecated
 	#pragma warning(disable : 4996)
+
+	#pragma warning(disable : 4275)
 
 	#if !defined _CRT_SECURE_NO_DEPRECATE
 		#define _CRT_SECURE_NO_DEPRECATE

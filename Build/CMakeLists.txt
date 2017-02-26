@@ -140,6 +140,7 @@ if(APPLE)
 endif()
 
 option(BUILD_SAMPLES "Build samples" OFF)
+option(DISABLE_RTTI "Build with rtti disable" OFF)
 if(WIN32)
 	option(SKIP_DIRECTX_SAMPLES "Skip build of all DirectX related samples.  Only applies if BUILD_SAMPLES is ON" OFF)
 	option(SKIP_DIRECTX9_SAMPLE "Skip build of DirectX 9 related sample.  Only applies if BUILD_SAMPLES is ON and SKIP_DIRECTX_SAMPLES is OFF" OFF)
@@ -394,6 +395,30 @@ if(BUILD_LUA_BINDINGS)
     endforeach(library)
 endif()
 
+
+
+if(DISABLE_RTTI)
+    set(ROCKET_SUPPORT_RTTI false)
+
+    if( CMAKE_COMPILER_IS_GNUCXX )
+		add_definitions( -fno-rtti -fno-exceptions )
+    elseif( MSVC )
+		add_definitions( -D_HAS_EXCEPTIONS=0 /GR- )
+		if(CMAKE_CXX_FLAGS MATCHES "/EHsc ")
+			string(REPLACE "/EHsc" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+			message(STATUS "CMAKE_CXX_FLAGS matches /EHsc before end of string replaced...")
+		endif()
+
+		if(CMAKE_CXX_FLAGS MATCHES "/EHsc$")
+			string(REPLACE "/EHsc" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+			message(STATUS "CMAKE_CXX_FLAGS matches /EHsc at end of string replaced...")
+		endif()
+    endif()
+else()
+    set(ROCKET_SUPPORT_RTTI true)
+endif()
+
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/Config.h.in ${PROJECT_SOURCE_DIR}/Include/Rocket/Core/Config.h)
 
 #===================================
 # Link libraries ===================

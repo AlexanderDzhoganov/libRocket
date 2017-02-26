@@ -42,7 +42,7 @@ XMLNodeHandlerTextArea::~XMLNodeHandlerTextArea()
 
 Core::Element* XMLNodeHandlerTextArea::ElementStart(Core::XMLParser* parser, const Rocket::Core::String& name, const Rocket::Core::XMLAttributes& attributes)
 {
-	ElementFormControlTextArea* text_area = dynamic_cast< ElementFormControlTextArea* >(parser->GetParseFrame()->element);
+	ElementFormControlTextArea* text_area = rocket_dynamic_cast< ElementFormControlTextArea* >(parser->GetParseFrame()->element);
 	if (text_area == NULL)
 	{
 		Core::Element* new_element = Core::Factory::InstanceElement(parser->GetParseFrame()->element, name, name, attributes);
@@ -68,7 +68,7 @@ bool XMLNodeHandlerTextArea::ElementEnd(Core::XMLParser* ROCKET_UNUSED_PARAMETER
 
 bool XMLNodeHandlerTextArea::ElementData(Core::XMLParser* parser, const Rocket::Core::String& data)
 {
-	ElementFormControlTextArea* text_area = dynamic_cast< ElementFormControlTextArea* >(parser->GetParseFrame()->element);
+	ElementFormControlTextArea* text_area = rocket_dynamic_cast< ElementFormControlTextArea* >(parser->GetParseFrame()->element);
 	if (text_area != NULL)
 	{
 		// Do any necessary translation.
